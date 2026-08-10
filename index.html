@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyCalc</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#111111">
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #111;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.calculator {
+  max-width: 430px;
+  margin: auto;
+  padding: 15px;
+}
+
+h2 {
+  text-align: center;
+}
+
+#display {
+  width: 100%;
+  height: 90px;
+  background: #222;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-size: 35px;
+  text-align: right;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+button {
+  height: 65px;
+  border: none;
+  border-radius: 14px;
+  font-size: 21px;
+  background: #333;
+  color: white;
+}
+
+button:active {
+  transform: scale(.95);
+}
+
+.operator {
+  background: #ff9500;
+}
+
+.scientific {
+  background: #555;
+}
+
+.clear {
+  background: #d9534f;
+}
+
+.equals {
+  background: #28a745;
+}
+
+.history {
+  margin-top: 15px;
+  background: #222;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.history h3 {
+  margin-top: 0;
+}
+
+#historyList {
+  max-height: 150px;
+  overflow-y: auto;
+  font-size: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="calculator">
+
+<h2>MyCalc</h2>
+
+<input id="display" value="0" readonly>
+
+<div class="buttons">
+
+<button class="scientific" onclick="sqrt()">√</button>
+<button class="scientific" onclick="square()">x²</button>
+<button class="scientific" onclick="power()">xʸ</button>
+<button class="scientific" onclick="percent()">%</button>
+
+<button class="scientific" onclick="sin()">sin</button>
+<button class="scientific" onclick="cos()">cos</button>
+<button class="scientific" onclick="tan()">tan</button>
+<button class="scientific" onclick="log()">log</button>
+
+<button class="clear" onclick="clearDisplay()">AC</button>
+<button onclick="deleteLast()">⌫</button>
+<button onclick="addValue('(')">(</button>
+<button onclick="addValue(')')">)</button>
+
+<button onclick="addValue('7')">7</button>
+<button onclick="addValue('8')">8</button>
+<button onclick="addValue('9')">9</button>
+<button class="operator" onclick="addValue('/')">÷</button>
+
+<button onclick="addValue('4')">4</button>
+<button onclick="addValue('5')">5</button>
+<button onclick="addValue('6')">6</button>
+<button class="operator" onclick="addValue('*')">×</button>
+
+<button onclick="addValue('1')">1</button>
+<button onclick="addValue('2')">2</button>
+<button onclick="addValue('3')">3</button>
+<button class="operator" onclick="addValue('-')">−</button>
+
+<button onclick="addValue('0')" style="grid-column: span 2;">0</button>
+<button onclick="addValue('.')">.</button>
+<button class="operator" onclick="addValue('+')">+</button>
+
+<button class="equals" style="grid-column: span 4;" onclick="calculate()">=</button>
+
+</div>
+
+<div class="history">
+<h3>History</h3>
+<div id="historyList"></div>
+</div>
+
+</div>
+
+<script>
+
+let display = document.getElementById("display");
+let historyList = document.getElementById("historyList");
+
+function addValue(value) {
+  if (display.value === "0" || display.value === "Error") {
+    display.value = value;
+  } else {
+    display.value += value;
+  }
+}
+
+function clearDisplay() {
+  display.value = "0";
+}
+
+function deleteLast() {
+  display.value = display.value.slice(0, -1);
+
+  if (display.value === "") {
+    display.value = "0";
+  }
+}
+
+function calculate() {
+  try {
+    let expression = display.value;
+    let result = eval(expression);
+
+    addHistory(expression + " = " + result);
+
+    display.value = result;
+  } catch {
+    display.value = "Error";
+  }
+}
+
+function addHistory(text) {
+  let item = document.createElement("div");
+  item.textContent = text;
+
+  historyList.prepend(item);
+}
+
+function sqrt() {
+  let value = Number(display.value);
+  display.value = Math.sqrt(value);
+}
+
+function square() {
+  let value = Number(display.value);
+  display.value = value * value;
+}
+
+function power() {
+  display.value += "**";
+}
+
+function percent() {
+  let value = Number(display.value);
+  display.value = value / 100;
+}
+
+function sin() {
+  let value = Number(display.value);
+  display.value = Math.sin(value * Math.PI / 180);
+}
+
+function cos() {
+  let value = Number(display.value);
+  display.value = Math.cos(value * Math.PI / 180);
+}
+
+function tan() {
+  let value = Number(display.value);
+  display.value = Math.tan(value * Math.PI / 180);
+}
+
+function log() {
+  let value = Number(display.value);
+  display.value = Math.log10(value);
+}
+
+</script>
+
+</body>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("service-worker.js");
+  });
+}
+</script>
+</html>
