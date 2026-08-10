@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#111111">
 <link rel="manifest" href="manifest.json">
 <title>MyCalc</title>
@@ -13,42 +13,17 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-:root {
-  --bg: #111;
-  --panel: #1d1d1d;
-  --display: #242424;
-  --button: #333;
-  --scientific: #505050;
-  --text: #fff;
-  --operator: #ff9500;
-  --danger: #d9534f;
-  --equal: #28a745;
-  --border: #444;
-}
-
-body.light {
-  --bg: #f2f2f2;
-  --panel: #fff;
-  --display: #e9e9e9;
-  --button: #ddd;
-  --scientific: #c8c8c8;
-  --text: #111;
-  --border: #ccc;
-}
-
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--text);
+  background: #111;
+  color: white;
   font-family: Arial, sans-serif;
-  min-height: 100vh;
 }
 
 .calculator {
-  width: 100%;
-  max-width: 520px;
+  max-width: 500px;
   margin: auto;
-  padding: 12px;
+  padding: 15px;
 }
 
 .header {
@@ -59,121 +34,27 @@ body {
 }
 
 .title {
-  font-size: 24px;
+  font-size: 25px;
   font-weight: bold;
 }
 
-.header button {
-  width: 42px;
-  height: 42px;
-  font-size: 20px;
-  background: var(--button);
+#theme {
+  width: 45px;
+  height: 45px;
+  background: #333;
 }
 
 #display {
   width: 100%;
-  height: 105px;
-  background: var(--display);
-  color: var(--text);
-  border: none;
-  border-radius: 18px;
+  height: 100px;
+  background: #222;
+  color: white;
+  border: 0;
+  border-radius: 15px;
   font-size: 36px;
   text-align: right;
   padding: 15px;
-  outline: none;
   margin-bottom: 10px;
-}
-
-#mode {
-  text-align: right;
-  font-size: 12px;
-  opacity: .65;
-  margin: -5px 5px 8px;
-}
-
-.buttons {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 7px;
-}
-
-button {
-  height: 62px;
-  border: none;
-  border-radius: 14px;
-  background: var(--button);
-  color: var(--text);
-  font-size: 18px;
-  cursor: pointer;
-  transition: transform .08s;
-}
-
-button:active {
-  transform: scale(.93);
-}
-
-.scientific {
-  background: var(--scientific);
-  font-size: 15px;
-}
-
-.operator {
-  background: var(--operator);
-  color: white;
-}
-
-.danger {
-  background: var(--danger);
-  color: white;
-}
-
-.equal {
-  background: var(--equal);
-  color: white;
-}
-
-.wide {
-  grid-column: span 2;
-}
-
-.history {
-  margin-top: 15px;
-  background: var(--panel);
-  border-radius: 15px;
-  padding: 12px;
-}
-
-.history-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.history h3 {
-  margin: 0;
-}
-
-.small-button {
-  height: 36px;
-  padding: 0 12px;
-  font-size: 13px;
-}
-
-#historyList {
-  max-height: 180px;
-  overflow-y: auto;
-  margin-top: 8px;
-}
-
-.history-item {
-  padding: 9px 4px;
-  border-bottom: 1px solid var(--border);
-  font-size: 14px;
-  word-break: break-all;
-}
-
-.history-item:active {
-  background: var(--button);
 }
 
 .memory {
@@ -184,23 +65,104 @@ button:active {
 }
 
 .memory button {
-  height: 42px;
+  height: 45px;
   font-size: 14px;
 }
 
-@media (orientation: landscape) {
-  .calculator {
-    max-width: 800px;
-  }
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+}
 
-  #display {
-    height: 75px;
-    font-size: 30px;
-  }
+button {
+  height: 62px;
+  border: 0;
+  border-radius: 14px;
+  background: #333;
+  color: white;
+  font-size: 19px;
+}
 
-  button {
-    height: 50px;
-  }
+button:active {
+  transform: scale(.94);
+}
+
+.operator {
+  background: #ff9500;
+}
+
+.scientific {
+  background: #555;
+  font-size: 15px;
+}
+
+.clear {
+  background: #d9534f;
+}
+
+.equals {
+  background: #28a745;
+}
+
+.history {
+  margin-top: 15px;
+  background: #222;
+  padding: 12px;
+  border-radius: 15px;
+}
+
+.history-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.history-title button {
+  height: 38px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+
+.history-item {
+  padding: 9px 3px;
+  border-bottom: 1px solid #444;
+  font-size: 14px;
+}
+
+.light {
+  background: #f2f2f2;
+  color: #111;
+}
+
+.light #display,
+.light .history {
+  background: white;
+  color: #111;
+}
+
+.light button {
+  background: #ddd;
+  color: #111;
+}
+
+.light .operator {
+  background: #ff9500;
+  color: white;
+}
+
+.light .equals {
+  background: #28a745;
+  color: white;
+}
+
+.light .clear {
+  background: #d9534f;
+  color: white;
+}
+
+.light .scientific {
+  background: #bbb;
 }
 </style>
 </head>
@@ -211,10 +173,8 @@ button:active {
 
   <div class="header">
     <div class="title">MyCalc</div>
-    <button onclick="toggleTheme()" id="themeButton">☀️</button>
+    <button id="theme">🌙</button>
   </div>
-
-  <div id="mode">DEG</div>
 
   <input id="display" value="0" readonly>
 
@@ -227,15 +187,15 @@ button:active {
 
   <div class="buttons">
 
-    <button class="scientific" onclick="insertConstant('Math.PI')">π</button>
-    <button class="scientific" onclick="insertConstant('Math.E')">e</button>
-    <button class="scientific" onclick="sqrt()">√</button>
+    <button class="scientific" onclick="constantPi()">π</button>
+    <button class="scientific" onclick="constantE()">e</button>
+    <button class="scientific" onclick="squareRoot()">√</button>
     <button class="scientific" onclick="square()">x²</button>
 
     <button class="scientific" onclick="sin()">sin</button>
     <button class="scientific" onclick="cos()">cos</button>
     <button class="scientific" onclick="tan()">tan</button>
-    <button class="scientific" onclick="log10()">log</button>
+    <button class="scientific" onclick="log()">log</button>
 
     <button class="scientific" onclick="asin()">sin⁻¹</button>
     <button class="scientific" onclick="acos()">cos⁻¹</button>
@@ -247,40 +207,41 @@ button:active {
     <button class="scientific" onclick="factorial()">x!</button>
     <button class="scientific" onclick="percent()">%</button>
 
-    <button class="danger" onclick="clearDisplay()">AC</button>
+    <button class="clear" onclick="clearDisplay()">AC</button>
     <button onclick="deleteLast()">⌫</button>
-    <button onclick="addValue('(')">(</button>
-    <button onclick="addValue(')')">)</button>
+    <button onclick="add('(')">(</button>
+    <button onclick="add(')')">)</button>
 
-    <button onclick="addValue('7')">7</button>
-    <button onclick="addValue('8')">8</button>
-    <button onclick="addValue('9')">9</button>
-    <button class="operator" onclick="addValue('/')">÷</button>
+    <button onclick="add('7')">7</button>
+    <button onclick="add('8')">8</button>
+    <button onclick="add('9')">9</button>
+    <button class="operator" onclick="add('/')">÷</button>
 
-    <button onclick="addValue('4')">4</button>
-    <button onclick="addValue('5')">5</button>
-    <button onclick="addValue('6')">6</button>
-    <button class="operator" onclick="addValue('*')">×</button>
+    <button onclick="add('4')">4</button>
+    <button onclick="add('5')">5</button>
+    <button onclick="add('6')">6</button>
+    <button class="operator" onclick="add('*')">×</button>
 
-    <button onclick="addValue('1')">1</button>
-    <button onclick="addValue('2')">2</button>
-    <button onclick="addValue('3')">3</button>
-    <button class="operator" onclick="addValue('-')">−</button>
+    <button onclick="add('1')">1</button>
+    <button onclick="add('2')">2</button>
+    <button onclick="add('3')">3</button>
+    <button class="operator" onclick="add('-')">−</button>
 
-    <button class="wide" onclick="addValue('0')">0</button>
-    <button onclick="addValue('.')">.</button>
-    <button class="operator" onclick="addValue('+')">+</button>
+    <button onclick="add('0')" style="grid-column:span 2">0</button>
+    <button onclick="add('.')">.</button>
+    <button class="operator" onclick="add('+')">+</button>
 
-    <button class="equal wide" onclick="calculate()">=</button>
-    <button onclick="clearDisplay()">C</button>
+    <button class="equals" onclick="calculate()" style="grid-column:span 4">
+      =
+    </button>
 
   </div>
 
   <div class="history">
 
-    <div class="history-header">
+    <div class="history-title">
       <h3>History</h3>
-      <button class="small-button" onclick="clearHistory()">Clear</button>
+      <button onclick="clearHistory()">Clear</button>
     </div>
 
     <div id="historyList"></div>
@@ -295,24 +256,556 @@ const display = document.getElementById("display");
 const historyList = document.getElementById("historyList");
 
 let memory = Number(localStorage.getItem("mycalc-memory")) || 0;
-let darkMode = localStorage.getItem("mycalc-theme") !== "light";
-
-if (!darkMode) {
-  document.body.classList.add("light");
-}
 
 
-// -------------------------
-// BUTTON FEEDBACK
-// -------------------------
+// ----------------------
+// BASIC BUTTONS
+// ----------------------
 
-function feedback() {
-  if (navigator.vibrate) {
-    navigator.vibrate(15);
+function add(value) {
+
+  vibrate();
+
+  if (
+    display.value === "0" ||
+    display.value === "Error"
+  ) {
+    display.value = value;
+  } else {
+    display.value += value;
   }
 }
 
 
-// -------------------------
-// DISPLAY
-//
+function clearDisplay() {
+
+  vibrate();
+
+  display.value = "0";
+}
+
+
+function deleteLast() {
+
+  vibrate();
+
+  if (
+    display.value === "Error" ||
+    display.value.length <= 1
+  ) {
+    display.value = "0";
+  } else {
+    display.value =
+      display.value.slice(0, -1);
+  }
+}
+
+
+// ----------------------
+// CALCULATOR
+// ----------------------
+
+function calculate() {
+
+  vibrate();
+
+  try {
+
+    let expression = display.value;
+
+    /*
+      Convert percentage.
+      Example: 50% → 0.5
+    */
+    expression =
+      expression.replace(
+        /(\d+(?:\.\d+)?)%/g,
+        "($1/100)"
+      );
+
+    /*
+      Only permit normal arithmetic.
+    */
+    if (
+      !/^[0-9+\-*/().\s]+$/.test(expression)
+    ) {
+      throw new Error();
+    }
+
+    let result =
+      Function(
+        "return (" +
+        expression +
+        ")"
+      )();
+
+    if (!Number.isFinite(result)) {
+      throw new Error();
+    }
+
+    result =
+      format(result);
+
+    addHistory(
+      display.value +
+      " = " +
+      result
+    );
+
+    display.value = result;
+
+  } catch {
+
+    display.value = "Error";
+
+  }
+}
+
+
+function format(number) {
+
+  if (!Number.isFinite(number)) {
+    return "Error";
+  }
+
+  return Number(
+    number.toFixed(10)
+  ).toString();
+}
+
+
+// ----------------------
+// SCIENTIFIC
+// ----------------------
+
+function getValue() {
+  return Number(display.value);
+}
+
+
+function constantPi() {
+
+  display.value =
+    format(Math.PI);
+
+}
+
+
+function constantE() {
+
+  display.value =
+    format(Math.E);
+
+}
+
+
+function squareRoot() {
+
+  let value = getValue();
+
+  if (value < 0) {
+    display.value = "Error";
+    return;
+  }
+
+  display.value =
+    format(Math.sqrt(value));
+
+}
+
+
+function square() {
+
+  let value = getValue();
+
+  display.value =
+    format(value * value);
+
+}
+
+
+function power() {
+
+  display.value += "**";
+
+}
+
+
+function tenPower() {
+
+  let value = getValue();
+
+  display.value =
+    format(Math.pow(10, value));
+
+}
+
+
+function sin() {
+
+  let value = getValue();
+
+  display.value =
+    format(
+      Math.sin(
+        value * Math.PI / 180
+      )
+    );
+
+}
+
+
+function cos() {
+
+  let value = getValue();
+
+  display.value =
+    format(
+      Math.cos(
+        value * Math.PI / 180
+      )
+    );
+
+}
+
+
+function tan() {
+
+  let value = getValue();
+
+  display.value =
+    format(
+      Math.tan(
+        value * Math.PI / 180
+      )
+    );
+
+}
+
+
+function asin() {
+
+  let value = getValue();
+
+  if (value < -1 || value > 1) {
+    display.value = "Error";
+    return;
+  }
+
+  display.value =
+    format(
+      Math.asin(value) *
+      180 / Math.PI
+    );
+
+}
+
+
+function acos() {
+
+  let value = getValue();
+
+  if (value < -1 || value > 1) {
+    display.value = "Error";
+    return;
+  }
+
+  display.value =
+    format(
+      Math.acos(value) *
+      180 / Math.PI
+    );
+
+}
+
+
+function atan() {
+
+  let value = getValue();
+
+  display.value =
+    format(
+      Math.atan(value) *
+      180 / Math.PI
+    );
+
+}
+
+
+function log() {
+
+  let value = getValue();
+
+  if (value <= 0) {
+    display.value = "Error";
+    return;
+  }
+
+  display.value =
+    format(Math.log10(value));
+
+}
+
+
+function ln() {
+
+  let value = getValue();
+
+  if (value <= 0) {
+    display.value = "Error";
+    return;
+  }
+
+  display.value =
+    format(Math.log(value));
+
+}
+
+
+function factorial() {
+
+  let value = getValue();
+
+  if (
+    value < 0 ||
+    !Number.isInteger(value) ||
+    value > 170
+  ) {
+    display.value = "Error";
+    return;
+  }
+
+  let result = 1;
+
+  for (
+    let i = 2;
+    i <= value;
+    i++
+  ) {
+    result *= i;
+  }
+
+  display.value =
+    format(result);
+
+}
+
+
+function percent() {
+
+  let value = getValue();
+
+  display.value =
+    format(value / 100);
+
+}
+
+
+// ----------------------
+// MEMORY
+// ----------------------
+
+function memoryClear() {
+
+  memory = 0;
+
+  localStorage.setItem(
+    "mycalc-memory",
+    "0"
+  );
+
+}
+
+
+function memoryRecall() {
+
+  display.value =
+    format(memory);
+
+}
+
+
+function memoryAdd() {
+
+  let value = getValue();
+
+  if (Number.isFinite(value)) {
+
+    memory += value;
+
+    localStorage.setItem(
+      "mycalc-memory",
+      memory
+    );
+
+  }
+
+}
+
+
+function memorySubtract() {
+
+  let value = getValue();
+
+  if (Number.isFinite(value)) {
+
+    memory -= value;
+
+    localStorage.setItem(
+      "mycalc-memory",
+      memory
+    );
+
+  }
+
+}
+
+
+// ----------------------
+// HISTORY
+// ----------------------
+
+function addHistory(text) {
+
+  let history =
+    JSON.parse(
+      localStorage.getItem(
+        "mycalc-history"
+      )
+    ) || [];
+
+  history.unshift(text);
+
+  history =
+    history.slice(0, 100);
+
+  localStorage.setItem(
+    "mycalc-history",
+    JSON.stringify(history)
+  );
+
+  showHistory();
+}
+
+
+function showHistory() {
+
+  let history =
+    JSON.parse(
+      localStorage.getItem(
+        "mycalc-history"
+      )
+    ) || [];
+
+  historyList.innerHTML = "";
+
+  history.forEach(function(item) {
+
+    let row =
+      document.createElement("div");
+
+    row.className =
+      "history-item";
+
+    row.textContent = item;
+
+    row.onclick = function() {
+
+      let parts =
+        item.split(" = ");
+
+      if (parts.length > 1) {
+        display.value =
+          parts[1];
+      }
+
+    };
+
+    historyList.appendChild(row);
+
+  });
+
+}
+
+
+function clearHistory() {
+
+  localStorage.removeItem(
+    "mycalc-history"
+  );
+
+  showHistory();
+
+}
+
+
+// ----------------------
+// THEME
+// ----------------------
+
+document
+  .getElementById("theme")
+  .onclick = function() {
+
+    document.body.classList.toggle("light");
+
+    let light =
+      document.body.classList.contains(
+        "light"
+      );
+
+    localStorage.setItem(
+      "mycalc-theme",
+      light ? "light" : "dark"
+    );
+
+  };
+
+
+if (
+  localStorage.getItem(
+    "mycalc-theme"
+  ) === "light"
+) {
+
+  document.body.classList.add("light");
+
+}
+
+
+// ----------------------
+// VIBRATION
+// ----------------------
+
+function vibrate() {
+
+  if (navigator.vibrate) {
+    navigator.vibrate(10);
+  }
+
+}
+
+
+// ----------------------
+// START
+// ----------------------
+
+showHistory();
+
+
+// ----------------------
+// SERVICE WORKER
+// ----------------------
+
+if ("serviceWorker" in navigator) {
+
+  navigator.serviceWorker.register(
+    "service-worker.js"
+  );
+
+}
+
+</script>
+
+</body>
+</html>
