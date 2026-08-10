@@ -8,6 +8,7 @@
 <title>MyCalc</title>
 
 <style>
+
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
@@ -25,6 +26,8 @@ body {
   margin: auto;
   padding: 15px;
 }
+
+/* HEADER */
 
 .header {
   display: flex;
@@ -44,6 +47,8 @@ body {
   background: #333;
 }
 
+/* DISPLAY */
+
 #display {
   width: 100%;
   height: 100px;
@@ -57,6 +62,8 @@ body {
   margin-bottom: 10px;
 }
 
+/* MEMORY */
+
 .memory {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -69,6 +76,8 @@ body {
   font-size: 14px;
 }
 
+/* BUTTONS */
+
 .buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -79,7 +88,7 @@ button {
   height: 62px;
   border: 0;
   border-radius: 14px;
-  background: #000000;
+  background: #333;
   color: white;
   font-size: 19px;
 }
@@ -104,6 +113,8 @@ button:active {
 .equals {
   background: #28a745;
 }
+
+/* HISTORY */
 
 .history {
   margin-top: 15px;
@@ -130,13 +141,55 @@ button:active {
   font-size: 14px;
 }
 
+/* NOTES */
+
+.notes {
+  margin-top: 15px;
+  background: #222;
+  padding: 12px;
+  border-radius: 15px;
+}
+
+.notes-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notes-title h3 {
+  margin: 0;
+}
+
+.notes-title button {
+  height: 38px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+
+#notesBox {
+  width: 100%;
+  min-height: 180px;
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #333;
+  color: white;
+  font-size: 16px;
+  resize: vertical;
+  outline: none;
+}
+
+/* LIGHT MODE */
+
 .light {
   background: #f2f2f2;
   color: #111;
 }
 
 .light #display,
-.light .history {
+.light .history,
+.light .notes {
   background: white;
   color: #111;
 }
@@ -164,6 +217,12 @@ button:active {
 .light .scientific {
   background: #bbb;
 }
+
+.light #notesBox {
+  background: #eee;
+  color: #111;
+}
+
 </style>
 </head>
 
@@ -171,96 +230,363 @@ button:active {
 
 <div class="calculator">
 
+  <!-- HEADER -->
+
   <div class="header">
-    <div class="title">MyCalc</div>
-    <button id="theme">🌙</button>
+
+    <div class="title">
+      MyCalc
+    </div>
+
+    <button id="theme">
+      🌙
+    </button>
+
   </div>
 
-  <input id="display" value="0" readonly>
+
+  <!-- DISPLAY -->
+
+  <input
+    id="display"
+    value="0"
+    readonly
+  >
+
+
+  <!-- MEMORY -->
 
   <div class="memory">
-    <button onclick="memoryClear()">MC</button>
-    <button onclick="memoryRecall()">MR</button>
-    <button onclick="memoryAdd()">M+</button>
-    <button onclick="memorySubtract()">M−</button>
+
+    <button onclick="memoryClear()">
+      MC
+    </button>
+
+    <button onclick="memoryRecall()">
+      MR
+    </button>
+
+    <button onclick="memoryAdd()">
+      M+
+    </button>
+
+    <button onclick="memorySubtract()">
+      M−
+    </button>
+
   </div>
+
+
+  <!-- CALCULATOR BUTTONS -->
 
   <div class="buttons">
 
-    <button class="scientific" onclick="constantPi()">π</button>
-    <button class="scientific" onclick="constantE()">e</button>
-    <button class="scientific" onclick="squareRoot()">√</button>
-    <button class="scientific" onclick="square()">x²</button>
+    <!-- SCIENTIFIC -->
 
-    <button class="scientific" onclick="sin()">sin</button>
-    <button class="scientific" onclick="cos()">cos</button>
-    <button class="scientific" onclick="tan()">tan</button>
-    <button class="scientific" onclick="log()">log</button>
+    <button
+      class="scientific"
+      onclick="constantPi()">
+      π
+    </button>
 
-    <button class="scientific" onclick="asin()">sin⁻¹</button>
-    <button class="scientific" onclick="acos()">cos⁻¹</button>
-    <button class="scientific" onclick="atan()">tan⁻¹</button>
-    <button class="scientific" onclick="ln()">ln</button>
+    <button
+      class="scientific"
+      onclick="constantE()">
+      e
+    </button>
 
-    <button class="scientific" onclick="power()">xʸ</button>
-    <button class="scientific" onclick="tenPower()">10ˣ</button>
-    <button class="scientific" onclick="factorial()">x!</button>
-    <button class="scientific" onclick="percent()">%</button>
+    <button
+      class="scientific"
+      onclick="squareRoot()">
+      √
+    </button>
 
-    <button class="clear" onclick="clearDisplay()">AC</button>
-    <button onclick="deleteLast()">⌫</button>
-    <button onclick="add('(')">(</button>
-    <button onclick="add(')')">)</button>
+    <button
+      class="scientific"
+      onclick="square()">
+      x²
+    </button>
 
-    <button onclick="add('7')">7</button>
-    <button onclick="add('8')">8</button>
-    <button onclick="add('9')">9</button>
-    <button class="operator" onclick="add('/')">÷</button>
 
-    <button onclick="add('4')">4</button>
-    <button onclick="add('5')">5</button>
-    <button onclick="add('6')">6</button>
-    <button class="operator" onclick="add('*')">×</button>
+    <button
+      class="scientific"
+      onclick="sin()">
+      sin
+    </button>
 
-    <button onclick="add('1')">1</button>
-    <button onclick="add('2')">2</button>
-    <button onclick="add('3')">3</button>
-    <button class="operator" onclick="add('-')">−</button>
+    <button
+      class="scientific"
+      onclick="cos()">
+      cos
+    </button>
 
-    <button onclick="add('0')" style="grid-column:span 2">0</button>
-    <button onclick="add('.')">.</button>
-    <button class="operator" onclick="add('+')">+</button>
+    <button
+      class="scientific"
+      onclick="tan()">
+      tan
+    </button>
 
-    <button class="equals" onclick="calculate()" style="grid-column:span 4">
+    <button
+      class="scientific"
+      onclick="log()">
+      log
+    </button>
+
+
+    <button
+      class="scientific"
+      onclick="asin()">
+      sin⁻¹
+    </button>
+
+    <button
+      class="scientific"
+      onclick="acos()">
+      cos⁻¹
+    </button>
+
+    <button
+      class="scientific"
+      onclick="atan()">
+      tan⁻¹
+    </button>
+
+    <button
+      class="scientific"
+      onclick="ln()">
+      ln
+    </button>
+
+
+    <button
+      class="scientific"
+      onclick="power()">
+      xʸ
+    </button>
+
+    <button
+      class="scientific"
+      onclick="tenPower()">
+      10ˣ
+    </button>
+
+    <button
+      class="scientific"
+      onclick="factorial()">
+      x!
+    </button>
+
+    <button
+      class="scientific"
+      onclick="percent()">
+      %
+    </button>
+
+
+    <!-- CONTROLS -->
+
+    <button
+      class="clear"
+      onclick="clearDisplay()">
+      AC
+    </button>
+
+    <button onclick="deleteLast()">
+      ⌫
+    </button>
+
+    <button onclick="add('(')">
+      (
+    </button>
+
+    <button onclick="add(')')">
+      )
+    </button>
+
+
+    <!-- 7 8 9 -->
+
+    <button onclick="add('7')">
+      7
+    </button>
+
+    <button onclick="add('8')">
+      8
+    </button>
+
+    <button onclick="add('9')">
+      9
+    </button>
+
+    <button
+      class="operator"
+      onclick="add('/')">
+      ÷
+    </button>
+
+
+    <!-- 4 5 6 -->
+
+    <button onclick="add('4')">
+      4
+    </button>
+
+    <button onclick="add('5')">
+      5
+    </button>
+
+    <button onclick="add('6')">
+      6
+    </button>
+
+    <button
+      class="operator"
+      onclick="add('*')">
+      ×
+    </button>
+
+
+    <!-- 1 2 3 -->
+
+    <button onclick="add('1')">
+      1
+    </button>
+
+    <button onclick="add('2')">
+      2
+    </button>
+
+    <button onclick="add('3')">
+      3
+    </button>
+
+    <button
+      class="operator"
+      onclick="add('-')">
+      −
+    </button>
+
+
+    <!-- ZERO -->
+
+    <button
+      onclick="add('0')"
+      style="grid-column:span 2">
+      0
+    </button>
+
+    <button onclick="add('.')">
+      .
+    </button>
+
+    <button
+      class="operator"
+      onclick="add('+')">
+      +
+    </button>
+
+
+    <!-- EQUALS -->
+
+    <button
+      class="equals"
+      onclick="calculate()"
+      style="grid-column:span 4">
       =
     </button>
 
   </div>
 
+
+  <!-- HISTORY -->
+
   <div class="history">
 
     <div class="history-title">
-      <h3>History</h3>
-      <button onclick="clearHistory()">Clear</button>
+
+      <h3>
+        History
+      </h3>
+
+      <button onclick="clearHistory()">
+        Clear
+      </button>
+
     </div>
 
     <div id="historyList"></div>
 
   </div>
 
+
+  <!-- NOTES -->
+
+  <div class="notes">
+
+    <div class="notes-title">
+
+      <h3>
+        📝 Notes
+      </h3>
+
+      <button onclick="clearNotes()">
+        Clear
+      </button>
+
+    </div>
+
+    <textarea
+      id="notesBox"
+      placeholder="Write your notes here..."
+    ></textarea>
+
+  </div>
+
 </div>
+
 
 <script>
 
-const display = document.getElementById("display");
-const historyList = document.getElementById("historyList");
+/* =========================
+   BASIC SETUP
+========================= */
 
-let memory = Number(localStorage.getItem("mycalc-memory")) || 0;
+const display =
+  document.getElementById("display");
+
+const historyList =
+  document.getElementById("historyList");
+
+const notesBox =
+  document.getElementById("notesBox");
 
 
-// ----------------------
-// BASIC BUTTONS
-// ----------------------
+let memory =
+  Number(
+    localStorage.getItem(
+      "mycalc-memory"
+    )
+  ) || 0;
+
+
+/* =========================
+   BUTTON FEEDBACK
+========================= */
+
+function vibrate() {
+
+  if (
+    navigator.vibrate
+  ) {
+    navigator.vibrate(10);
+  }
+
+}
+
+
+/* =========================
+   BASIC CALCULATOR
+========================= */
 
 function add(value) {
 
@@ -270,10 +596,15 @@ function add(value) {
     display.value === "0" ||
     display.value === "Error"
   ) {
+
     display.value = value;
+
   } else {
+
     display.value += value;
+
   }
+
 }
 
 
@@ -282,6 +613,7 @@ function clearDisplay() {
   vibrate();
 
   display.value = "0";
+
 }
 
 
@@ -293,17 +625,25 @@ function deleteLast() {
     display.value === "Error" ||
     display.value.length <= 1
   ) {
+
     display.value = "0";
+
   } else {
+
     display.value =
-      display.value.slice(0, -1);
+      display.value.slice(
+        0,
+        -1
+      );
+
   }
+
 }
 
 
-// ----------------------
-// CALCULATOR
-// ----------------------
+/* =========================
+   CALCULATE
+========================= */
 
 function calculate() {
 
@@ -311,26 +651,26 @@ function calculate() {
 
   try {
 
-    let expression = display.value;
+    let expression =
+      display.value;
 
-    /*
-      Convert percentage.
-      Example: 50% → 0.5
-    */
+
     expression =
       expression.replace(
         /(\d+(?:\.\d+)?)%/g,
         "($1/100)"
       );
 
-    /*
-      Only permit normal arithmetic.
-    */
+
     if (
-      !/^[0-9+\-*/().\s]+$/.test(expression)
+      !/^[0-9+\-*/().\s]+$/
+        .test(expression)
     ) {
+
       throw new Error();
+
     }
+
 
     let result =
       Function(
@@ -339,12 +679,19 @@ function calculate() {
         ")"
       )();
 
-    if (!Number.isFinite(result)) {
+
+    if (
+      !Number.isFinite(result)
+    ) {
+
       throw new Error();
+
     }
+
 
     result =
       format(result);
+
 
     addHistory(
       display.value +
@@ -352,38 +699,58 @@ function calculate() {
       result
     );
 
-    display.value = result;
+
+    display.value =
+      result;
+
 
   } catch {
 
-    display.value = "Error";
+    display.value =
+      "Error";
 
   }
+
 }
 
 
+/* =========================
+   NUMBER FORMAT
+========================= */
+
 function format(number) {
 
-  if (!Number.isFinite(number)) {
+  if (
+    !Number.isFinite(number)
+  ) {
+
     return "Error";
+
   }
 
   return Number(
     number.toFixed(10)
   ).toString();
+
 }
 
 
-// ----------------------
-// SCIENTIFIC
-// ----------------------
+/* =========================
+   SCIENTIFIC
+========================= */
 
 function getValue() {
-  return Number(display.value);
+
+  return Number(
+    display.value
+  );
+
 }
 
 
 function constantPi() {
+
+  vibrate();
 
   display.value =
     format(Math.PI);
@@ -393,6 +760,8 @@ function constantPi() {
 
 function constantE() {
 
+  vibrate();
+
   display.value =
     format(Math.E);
 
@@ -401,54 +770,89 @@ function constantE() {
 
 function squareRoot() {
 
-  let value = getValue();
+  vibrate();
+
+  let value =
+    getValue();
+
 
   if (value < 0) {
-    display.value = "Error";
+
+    display.value =
+      "Error";
+
     return;
+
   }
 
+
   display.value =
-    format(Math.sqrt(value));
+    format(
+      Math.sqrt(value)
+    );
 
 }
 
 
 function square() {
 
-  let value = getValue();
+  vibrate();
+
+  let value =
+    getValue();
+
 
   display.value =
-    format(value * value);
+    format(
+      value * value
+    );
 
 }
 
 
 function power() {
 
-  display.value += "**";
+  vibrate();
+
+  display.value +=
+    "**";
 
 }
 
 
 function tenPower() {
 
-  let value = getValue();
+  vibrate();
+
+  let value =
+    getValue();
+
 
   display.value =
-    format(Math.pow(10, value));
+    format(
+      Math.pow(
+        10,
+        value
+      )
+    );
 
 }
 
 
 function sin() {
 
-  let value = getValue();
+  vibrate();
+
+  let value =
+    getValue();
+
 
   display.value =
     format(
       Math.sin(
-        value * Math.PI / 180
+        value *
+        Math.PI /
+        180
       )
     );
 
@@ -457,12 +861,18 @@ function sin() {
 
 function cos() {
 
-  let value = getValue();
+  vibrate();
+
+  let value =
+    getValue();
+
 
   display.value =
     format(
       Math.cos(
-        value * Math.PI / 180
+        value *
+        Math.PI /
+        180
       )
     );
 
@@ -471,12 +881,18 @@ function cos() {
 
 function tan() {
 
-  let value = getValue();
+  vibrate();
+
+  let value =
+    getValue();
+
 
   display.value =
     format(
       Math.tan(
-        value * Math.PI / 180
+        value *
+        Math.PI /
+        180
       )
     );
 
@@ -485,17 +901,30 @@ function tan() {
 
 function asin() {
 
-  let value = getValue();
+  vibrate();
 
-  if (value < -1 || value > 1) {
-    display.value = "Error";
+  let value =
+    getValue();
+
+
+  if (
+    value < -1 ||
+    value > 1
+  ) {
+
+    display.value =
+      "Error";
+
     return;
+
   }
+
 
   display.value =
     format(
       Math.asin(value) *
-      180 / Math.PI
+      180 /
+      Math.PI
     );
 
 }
@@ -503,17 +932,30 @@ function asin() {
 
 function acos() {
 
-  let value = getValue();
+  vibrate();
 
-  if (value < -1 || value > 1) {
-    display.value = "Error";
+  let value =
+    getValue();
+
+
+  if (
+    value < -1 ||
+    value > 1
+  ) {
+
+    display.value =
+      "Error";
+
     return;
+
   }
+
 
   display.value =
     format(
       Math.acos(value) *
-      180 / Math.PI
+      180 /
+      Math.PI
     );
 
 }
@@ -521,12 +963,17 @@ function acos() {
 
 function atan() {
 
-  let value = getValue();
+  vibrate();
+
+  let value =
+    getValue();
+
 
   display.value =
     format(
       Math.atan(value) *
-      180 / Math.PI
+      180 /
+      Math.PI
     );
 
 }
@@ -534,56 +981,96 @@ function atan() {
 
 function log() {
 
-  let value = getValue();
+  vibrate();
 
-  if (value <= 0) {
-    display.value = "Error";
+  let value =
+    getValue();
+
+
+  if (
+    value <= 0
+  ) {
+
+    display.value =
+      "Error";
+
     return;
+
   }
 
+
   display.value =
-    format(Math.log10(value));
+    format(
+      Math.log10(value)
+    );
 
 }
 
 
 function ln() {
 
-  let value = getValue();
+  vibrate();
 
-  if (value <= 0) {
-    display.value = "Error";
+  let value =
+    getValue();
+
+
+  if (
+    value <= 0
+  ) {
+
+    display.value =
+      "Error";
+
     return;
+
   }
 
+
   display.value =
-    format(Math.log(value));
+    format(
+      Math.log(value)
+    );
 
 }
 
 
 function factorial() {
 
-  let value = getValue();
+  vibrate();
+
+  let value =
+    getValue();
+
 
   if (
     value < 0 ||
     !Number.isInteger(value) ||
     value > 170
   ) {
-    display.value = "Error";
+
+    display.value =
+      "Error";
+
     return;
+
   }
 
-  let result = 1;
+
+  let result =
+    1;
+
 
   for (
     let i = 2;
     i <= value;
     i++
   ) {
+
     result *= i;
+
   }
+
 
   display.value =
     format(result);
@@ -593,21 +1080,31 @@ function factorial() {
 
 function percent() {
 
-  let value = getValue();
+  vibrate();
+
+  let value =
+    getValue();
+
 
   display.value =
-    format(value / 100);
+    format(
+      value / 100
+    );
 
 }
 
 
-// ----------------------
-// MEMORY
-// ----------------------
+/* =========================
+   MEMORY
+========================= */
 
 function memoryClear() {
 
-  memory = 0;
+  vibrate();
+
+  memory =
+    0;
+
 
   localStorage.setItem(
     "mycalc-memory",
@@ -619,6 +1116,8 @@ function memoryClear() {
 
 function memoryRecall() {
 
+  vibrate();
+
   display.value =
     format(memory);
 
@@ -627,11 +1126,19 @@ function memoryRecall() {
 
 function memoryAdd() {
 
-  let value = getValue();
+  vibrate();
 
-  if (Number.isFinite(value)) {
+  let value =
+    getValue();
 
-    memory += value;
+
+  if (
+    Number.isFinite(value)
+  ) {
+
+    memory +=
+      value;
+
 
     localStorage.setItem(
       "mycalc-memory",
@@ -645,11 +1152,19 @@ function memoryAdd() {
 
 function memorySubtract() {
 
-  let value = getValue();
+  vibrate();
 
-  if (Number.isFinite(value)) {
+  let value =
+    getValue();
 
-    memory -= value;
+
+  if (
+    Number.isFinite(value)
+  ) {
+
+    memory -=
+      value;
+
 
     localStorage.setItem(
       "mycalc-memory",
@@ -661,9 +1176,9 @@ function memorySubtract() {
 }
 
 
-// ----------------------
-// HISTORY
-// ----------------------
+/* =========================
+   HISTORY
+========================= */
 
 function addHistory(text) {
 
@@ -674,17 +1189,29 @@ function addHistory(text) {
       )
     ) || [];
 
-  history.unshift(text);
+
+  history.unshift(
+    text
+  );
+
 
   history =
-    history.slice(0, 100);
+    history.slice(
+      0,
+      100
+    );
+
 
   localStorage.setItem(
     "mycalc-history",
-    JSON.stringify(history)
+    JSON.stringify(
+      history
+    )
   );
 
+
   showHistory();
+
 }
 
 
@@ -697,66 +1224,157 @@ function showHistory() {
       )
     ) || [];
 
-  historyList.innerHTML = "";
 
-  history.forEach(function(item) {
+  historyList.innerHTML =
+    "";
 
-    let row =
-      document.createElement("div");
 
-    row.className =
-      "history-item";
+  history.forEach(
+    function(item) {
 
-    row.textContent = item;
+      let row =
+        document.createElement(
+          "div"
+        );
 
-    row.onclick = function() {
 
-      let parts =
-        item.split(" = ");
+      row.className =
+        "history-item";
 
-      if (parts.length > 1) {
-        display.value =
-          parts[1];
-      }
 
-    };
+      row.textContent =
+        item;
 
-    historyList.appendChild(row);
 
-  });
+      row.onclick =
+        function() {
+
+          let parts =
+            item.split(
+              " = "
+            );
+
+
+          if (
+            parts.length > 1
+          ) {
+
+            display.value =
+              parts[1];
+
+          }
+
+        };
+
+
+      historyList.appendChild(
+        row
+      );
+
+    }
+  );
 
 }
 
 
 function clearHistory() {
 
+  vibrate();
+
   localStorage.removeItem(
     "mycalc-history"
   );
+
 
   showHistory();
 
 }
 
 
-// ----------------------
-// THEME
-// ----------------------
+/* =========================
+   NOTES
+========================= */
+
+/* Load saved notes */
+
+notesBox.value =
+  localStorage.getItem(
+    "mycalc-notes"
+  ) || "";
+
+
+/* Save automatically */
+
+notesBox.addEventListener(
+  "input",
+  function() {
+
+    localStorage.setItem(
+      "mycalc-notes",
+      notesBox.value
+    );
+
+  }
+);
+
+
+/* Clear notes */
+
+function clearNotes() {
+
+  vibrate();
+
+  if (
+    confirm(
+      "Delete all notes?"
+    )
+  ) {
+
+    notesBox.value =
+      "";
+
+
+    localStorage.removeItem(
+      "mycalc-notes"
+    );
+
+  }
+
+}
+
+
+/* =========================
+   THEME
+========================= */
 
 document
   .getElementById("theme")
-  .onclick = function() {
+  .onclick =
+  function() {
 
-    document.body.classList.toggle("light");
+    vibrate();
 
-    let light =
-      document.body.classList.contains(
+
+    document.body
+      .classList
+      .toggle(
         "light"
       );
 
+
+    let light =
+      document.body
+        .classList
+        .contains(
+          "light"
+        );
+
+
     localStorage.setItem(
       "mycalc-theme",
-      light ? "light" : "dark"
+      light
+        ? "light"
+        : "dark"
     );
 
   };
@@ -768,40 +1386,45 @@ if (
   ) === "light"
 ) {
 
-  document.body.classList.add("light");
+  document.body
+    .classList
+    .add(
+      "light"
+    );
 
 }
 
 
-// ----------------------
-// VIBRATION
-// ----------------------
-
-function vibrate() {
-
-  if (navigator.vibrate) {
-    navigator.vibrate(10);
-  }
-
-}
-
-
-// ----------------------
-// START
-// ----------------------
+/* =========================
+   START
+========================= */
 
 showHistory();
 
 
-// ----------------------
-// SERVICE WORKER
-// ----------------------
+/* =========================
+   SERVICE WORKER
+========================= */
 
-if ("serviceWorker" in navigator) {
+if (
+  "serviceWorker"
+  in navigator
+) {
 
-  navigator.serviceWorker.register(
-    "service-worker.js"
-  );
+  navigator.serviceWorker
+    .register(
+      "service-worker.js"
+    )
+    .catch(
+      function(error) {
+
+        console.log(
+          "Service Worker Error:",
+          error
+        );
+
+      }
+    );
 
 }
 
